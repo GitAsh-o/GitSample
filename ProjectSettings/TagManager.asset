@@ -12,6 +12,7 @@ TagManager:
   - wall
   - deletewall
   - floor
+  - goal
   layers:
   - Default
   - TransparentFX
