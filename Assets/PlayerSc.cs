@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerSc : MonoBehaviour
 {
@@ -59,17 +60,17 @@ public class PlayerSc : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                GetComponent<Rigidbody2D>().velocity = new Vector3(0, 5f, 0);
+                GetComponent<Rigidbody2D>().velocity = new Vector3(0, 7.5f, 0);
             }
 
             if (Input.GetKey(KeyCode.LeftArrow))
             {
-                transform.Translate(-0.03f, 0f, 0f);
+                transform.position += new Vector3(-0.1f, 0, 0);
                 Debug.Log("La");
             }
             if (Input.GetKey(KeyCode.RightArrow))
             {
-                transform.Translate(0.03f, 0f, 0f);
+                transform.position += new Vector3(0.1f, 0, 0);
                 Debug.Log("Ra");
             }
         }
@@ -82,6 +83,7 @@ public class PlayerSc : MonoBehaviour
         {
             GetComponent<Rigidbody2D>().gravityScale = 0;
             GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+            speed = 7.5f;
             jump = 1;
             a = 0f;
             b = -0.4f;
@@ -95,6 +97,7 @@ public class PlayerSc : MonoBehaviour
         {
             GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             GetComponent<Rigidbody2D>().gravityScale = 0;
+            speed = 7.5f;
             jump = 1;
             a = 1.0f;
             b = 0.6f;
@@ -108,6 +111,7 @@ public class PlayerSc : MonoBehaviour
         {
             GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             GetComponent<Rigidbody2D>().gravityScale = 0;
+            speed = 7.5f;
             jump = 1;
             a = 0.5f;
             b = 0.1f;
@@ -121,6 +125,7 @@ public class PlayerSc : MonoBehaviour
         {
             GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             GetComponent<Rigidbody2D>().gravityScale = 0;
+            speed = 7.5f;
             jump = 1;
             a = -0.5f;
             b = -0.9f;
@@ -148,9 +153,17 @@ public class PlayerSc : MonoBehaviour
         }
         if (col.gameObject.CompareTag("floor"))
         {
-            jump = 2;
-            Text.SetActive(false);
+            GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+            jump = 1;
+            a = 0.5f;
+            b = 0.1f;
+            c = 0.9f;
+            offset.transform.rotation = Quaternion.Euler(0, 0, 180 * a - 90);
+            Text.SetActive(true);
+        }
+        if (col.gameObject.CompareTag("goal"))
+        {
+            SceneManager.LoadScene("goal");
         }
     }
 }
-
