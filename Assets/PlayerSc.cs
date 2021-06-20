@@ -55,6 +55,24 @@ public class PlayerSc : MonoBehaviour
             sita = a * (Mathf.PI);
             offset.transform.rotation = Quaternion.Euler(0, 0, 180 * a - 90);
         }
+        if (jump == 2)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                GetComponent<Rigidbody2D>().velocity = new Vector3(0, 5f, 0);
+            }
+
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                transform.Translate(-0.03f, 0f, 0f);
+                Debug.Log("La");
+            }
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                transform.Translate(0.03f, 0f, 0f);
+                Debug.Log("Ra");
+            }
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D col)
@@ -130,13 +148,9 @@ public class PlayerSc : MonoBehaviour
         }
         if (col.gameObject.CompareTag("floor"))
         {
-            GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-            GetComponent<Rigidbody2D>().gravityScale = 0;
-            jump = 1;
-            Text.SetActive(true);
-            a = 0.5f;
-            b = 0.1f;
-            c = 0.9f;
+            jump = 2;
+            Text.SetActive(false);
         }
     }
 }
+
