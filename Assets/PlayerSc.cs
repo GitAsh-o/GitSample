@@ -56,23 +56,9 @@ public class PlayerSc : MonoBehaviour
             sita = a * (Mathf.PI);
             offset.transform.rotation = Quaternion.Euler(0, 0, 180 * a - 90);
         }
-        if (jump == 2)
+        if(this.gameObject.transform.position.y < -10)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                GetComponent<Rigidbody2D>().velocity = new Vector3(0, 7.5f, 0);
-            }
-
-            if (Input.GetKey(KeyCode.LeftArrow))
-            {
-                transform.position += new Vector3(-0.1f, 0, 0);
-                Debug.Log("La");
-            }
-            if (Input.GetKey(KeyCode.RightArrow))
-            {
-                transform.position += new Vector3(0.1f, 0, 0);
-                Debug.Log("Ra");
-            }
+            SceneManager.LoadScene("gameover");
         }
     }
 
