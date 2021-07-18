@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class PlayerSc : MonoBehaviour
 {
+    [SerializeField] private DrawLine dLine = default;　//予測起動を表示
+
+    [SerializeField] private GameObject Text;
+
     float a = 0.5f;
     float b = 0.1f;
     float c = 0.9f;
@@ -13,13 +16,14 @@ public class PlayerSc : MonoBehaviour
     float speed = 7.5f;
     int jump = 0;
     public GameObject offset;
-    [SerializeField] private GameObject Text;
+    public GameObject drawCube;
 
     // Start is called before the first frame update
     void Start()
     {
         offset.transform.rotation = Quaternion.Euler(0, 0, 180 * a - 90);
         sita = a * (Mathf.PI);
+        drawCube = GameObject.Find("DrawLine");
     }
 
     // Update is called once per frame
@@ -46,6 +50,7 @@ public class PlayerSc : MonoBehaviour
             }
             sita = a * (Mathf.PI);
             offset.transform.rotation = Quaternion.Euler(0, 0, 180 * a - 90);
+            drawCube.GetComponent<DrawLine>().Set(new Vector3(Mathf.Cos(sita) * speed, Mathf.Sin(sita) * speed, 0));
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
@@ -56,6 +61,7 @@ public class PlayerSc : MonoBehaviour
             }
             sita = a * (Mathf.PI);
             offset.transform.rotation = Quaternion.Euler(0, 0, 180 * a - 90);
+            drawCube.GetComponent<DrawLine>().Set(new Vector3(Mathf.Cos(sita) * speed, Mathf.Sin(sita) * speed, 0));
         }
         if(this.gameObject.transform.position.y < -10)
         {
