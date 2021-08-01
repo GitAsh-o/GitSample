@@ -52,11 +52,11 @@ public class DrawLine : MonoBehaviour
             
             int distance2D = 30;
 
-            if (Physics2D.Raycast(ray,out hit2D,distance2D))
+            /*if (Physics2D.Raycast(ray,out hit2D,distance2D))
             {
                 Debug.Log("aaaaaaa");
                 player.GetComponent<PlayerSc>().delete();
-            }
+            }*/
         }
     }
     
