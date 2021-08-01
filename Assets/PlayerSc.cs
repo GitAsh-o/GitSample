@@ -15,6 +15,7 @@ public class PlayerSc : MonoBehaviour
     float sita = 0;
     float speed = 7.5f;
     int jump = 0;
+    int checknumber = 0;
     public GameObject offset;
     public GameObject drawCube;
 
@@ -38,6 +39,7 @@ public class PlayerSc : MonoBehaviour
                 jump = 0;
                 transform.parent = null;
                 Text.SetActive(false);
+                drawCube.SetActive(false);
                 DeletewallSc.istouch = false;
             }
         }
@@ -84,6 +86,7 @@ public class PlayerSc : MonoBehaviour
             sita = a * (Mathf.PI);
             offset.transform.rotation = Quaternion.Euler(0, 0, 180 * a - 90);
             Text.SetActive(true);
+            drawCube.SetActive(true);
             Debug.Log("right");
         }
         if (col.gameObject.CompareTag("left wall"))
@@ -98,6 +101,7 @@ public class PlayerSc : MonoBehaviour
             sita = a * (Mathf.PI);
             offset.transform.rotation = Quaternion.Euler(0, 0, 180 * a - 90);
             Text.SetActive(true);
+            drawCube.SetActive(true);
             Debug.Log("left");
         }
         if (col.gameObject.CompareTag("head wall"))
@@ -112,6 +116,7 @@ public class PlayerSc : MonoBehaviour
             sita = a * (Mathf.PI);
             offset.transform.rotation = Quaternion.Euler(0, 0, 180 * a - 90);
             Text.SetActive(true);
+            drawCube.SetActive(true);
             Debug.Log("head");
         }
         if (col.gameObject.CompareTag("bottom wall"))
@@ -126,6 +131,7 @@ public class PlayerSc : MonoBehaviour
             sita = a * (Mathf.PI);
             offset.transform.rotation = Quaternion.Euler(0, 0, 180 * a - 90);
             Text.SetActive(true);
+            drawCube.SetActive(true);
             Debug.Log("bottom");
         }
         if (col.gameObject.CompareTag("wall"))
@@ -153,10 +159,24 @@ public class PlayerSc : MonoBehaviour
             c = 0.9f;
             offset.transform.rotation = Quaternion.Euler(0, 0, 180 * a - 90);
             Text.SetActive(true);
+            drawCube.SetActive(true);
         }
         if (col.gameObject.CompareTag("goal"))
         {
             SceneManager.LoadScene("goal");
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Check"))
+        {
+            other.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+        }
+    }
+
+    public void delete()
+    {
+        drawCube.SetActive(false);
     }
 }
